@@ -1,0 +1,285 @@
+/* responsive.css - Các style phản hồi cho hiển thị trên nhiều thiết bị */
+
+/* Tablet (768px đến 1023px) */
+@media screen and (max-width: 1023px) {
+    /* Điều chỉnh header */
+    .logo-text h1 {
+        font-size: 1.3rem;
+    }
+    
+    .logo-img img {
+        width: 35px;
+        height: 35px;
+    }
+    
+    /* Điều chỉnh hero */
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.2rem;
+    }
+    
+    /* Điều chỉnh section */
+    section {
+        padding: 60px 0;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    /* Điều chỉnh grid thẻ nguyên tố */
+    .element-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    /* Điều chỉnh section game */
+    .game-showcase {
+        gap: 2rem;
+    }
+    
+    .game-features {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    /* Điều chỉnh section gameplay */
+    .gameplay-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .gameplay-image {
+        order: 1;
+    }
+    
+    .gameplay-info {
+        order: 2;
+    }
+    
+    .gameplay-tabs {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    /* Điều chỉnh section team */
+    .team-intro {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .team-image {
+        text-align: center;
+    }
+    
+    .team-image img {
+        max-width: 400px;
+    }
+    
+    .team-members {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    
+    /* Điều chỉnh contact */
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .contact-form {
+        order: 1;
+    }
+    
+    .contact-info {
+        order: 2;
+    }
+    
+    /* Điều chỉnh footer */
+    .footer-content {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .footer-links {
+        justify-content: flex-start;
+    }
+}
+
+/* Mobile (767px và nhỏ hơn) */
+@media screen and (max-width: 767px) {
+    /* Điều chỉnh header */
+    .logo-text p {
+        display: none;
+    }
+    
+    #menu-toggle {
+        display: block;
+    }
+    
+    nav ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: rgba(10, 10, 10, 0.97);
+        width: 100%;
+        flex-direction: column;
+        padding: 1rem 0;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    }
+    
+    nav ul.active {
+        display: flex;
+    }
+    
+    nav li {
+        margin: 0.8rem 5%;
+    }
+    
+    /* Điều chỉnh hero */
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.1rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    /* Điều chỉnh section */
+    section {
+        padding: 50px 0;
+    }
+    
+    h2 {
+        font-size: 1.6rem;
+    }
+    
+    .section-intro {
+        font-size: 1rem;
+    }
+    
+    /* Điều chỉnh grid thẻ nguyên tố */
+    .element-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Điều chỉnh game features */
+    .game-features {
+        grid-template-columns: 1fr;
+    }
+    
+    .game-tagline {
+        font-size: 1.2rem;
+    }
+    
+    /* Điều chỉnh gameplay tabs */
+    .gameplay-tabs {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    
+    .gameplay-tab-content {
+        padding: 1.5rem;
+    }
+    
+    /* Điều chỉnh team members */
+    .team-members {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    /* Điều chỉnh social */
+    .social-icons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    /* Điều chỉnh footer */
+    .footer-links {
+        flex-direction: column;
+        gap: 2rem;
+    }
+}
+
+/* Điều chỉnh cho màn hình siêu nhỏ */
+@media screen and (max-width: 480px) {
+    /* Điều chỉnh header */
+    .logo {
+        gap: 10px;
+    }
+    
+    .logo-text h1 {
+        font-size: 1.1rem;
+    }
+    
+    .logo-img img {
+        width: 30px;
+        height: 30px;
+    }
+    
+    /* Điều chỉnh hero */
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 1rem;
+    }
+    
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    /* Điều chỉnh section */
+    section {
+        padding: 40px 0;
+    }
+    
+    h2 {
+        font-size: 1.4rem;
+    }
+    
+    h3 {
+        font-size: 1.2rem;
+    }
+    
+    /* Điều chỉnh section team */
+    .member {
+        padding: 1.5rem;
+    }
+    
+    .member-image {
+        width: 120px;
+        height: 120px;
+    }
+    
+    /* Điều chỉnh form */
+    .form-group input, .form-group textarea, .form-group select, .newsletter-form input {
+        padding: 0.8rem;
+    }
+    
+    .submit-button {
+        padding: 0.8rem;
+    }
+    
+    /* Điều chỉnh footer */
+    .footer-logo img {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .social-icon {
+        width: 40px;
+        height: 40px;
+    }
+}
