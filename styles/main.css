@@ -8,41 +8,41 @@
 }
 
 :root {
-    /* Elemental Colors - Primary Palette */
-    --color-metal: #8A92B2;     /* Silver with blue tint */
-    --color-wood: #4D6B38;      /* Deep emerald green */
-    --color-water: #1E3A5F;     /* Deep navy blue */
-    --color-earth: #6B4226;     /* Rich earth brown */
-    --color-fire: #9E2A2B;      /* Blood red */
+    /* Elemental Colors - Enhanced Palette */
+    --color-metal: #c5d1eb;     /* Brighter silvery blue */
+    --color-wood: #73b95c;      /* Vivid emerald green */
+    --color-water: #3e88c2;     /* Deeper azure blue */
+    --color-earth: #b5835a;     /* Rich amber brown */
+    --color-fire: #e64c4c;      /* Vibrant crimson red */
     
-    /* Enhanced Elemental Colors for Effects */
-    --color-metal-glow: rgba(138, 146, 178, 0.7);
-    --color-wood-glow: rgba(77, 107, 56, 0.7);
-    --color-water-glow: rgba(30, 58, 95, 0.7);
-    --color-earth-glow: rgba(107, 66, 38, 0.7);
-    --color-fire-glow: rgba(158, 42, 43, 0.7);
+    /* Enhanced Elemental Glow Effects */
+    --color-metal-glow: rgba(197, 209, 235, 0.7);
+    --color-wood-glow: rgba(115, 185, 92, 0.7);
+    --color-water-glow: rgba(62, 136, 194, 0.7);
+    --color-earth-glow: rgba(181, 131, 90, 0.7);
+    --color-fire-glow: rgba(230, 76, 76, 0.7);
     
-    /* Màu chung - Dark Theme with Elemental Harmony */
-    --color-bg: #0A0D14;        /* Very dark blue-black */
-    --color-bg-alt: #131823;    /* Dark blue-gray */
-    --color-card-bg: #1A212E;   /* Dark blue-gray for cards */
-    --color-text: #E6E9F2;      /* Pale blue-white */
-    --color-text-secondary: #A0A7BC; /* Muted blue-gray */
-    --color-text-dark: #282E3A; /* Dark blue-gray */
+    /* Main theme colors - Mystical Dark Theme */
+    --color-bg: #0a0f1a;        /* Deep indigo-black */
+    --color-bg-alt: #141c2b;    /* Rich navy blue */
+    --color-card-bg: #1d2639;   /* Dark slate blue for cards */
+    --color-text: #f0f2fa;      /* Soft white with blue tint */
+    --color-text-secondary: #b0bbd0; /* Muted periwinkle */
+    --color-text-dark: #282e3f; /* Dark blue-gray */
     
-    /* Accent Colors */
-    --color-accent: #4A3052;    /* Deep purple as neutral accent */
-    --color-highlight: #735D8F; /* Medium purple highlight */
+    /* Accent Colors - Mystical Theme */
+    --color-accent: #6a4caf;    /* Deep amethyst purple */
+    --color-highlight: #8a68d4; /* Medium lavender highlight */
     
     /* Font chữ */
     --font-heading: 'Cinzel Decorative', 'IM Fell English SC', serif;
     --font-body: 'Cormorant Garamond', 'Alegreya Sans', serif;
     
     /* Shadow và Effect */
-    --card-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
-    --element-glow: 0 0 20px;
+    --card-shadow: 0 8px 24px rgba(0, 0, 0, 0.7), 0 0 8px rgba(138, 104, 212, 0.2);
+    --element-glow: 0 0 25px;
     --section-gap: 80px;
-    --text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.8);
+    --text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=IM+Fell+English+SC&family=Cormorant+Garamond:wght@300;400;500;600;700&family=Alegreya+Sans:wght@300;400;500;700&display=swap');
@@ -105,7 +105,7 @@ h2:after {
     position: absolute;
     width: 100%;
     height: 3px;
-    background: linear-gradient(90deg, var(--color-highlight), transparent);
+    background: linear-gradient(90deg, var(--color-highlight), rgba(138, 104, 212, 0.3), transparent);
     bottom: -10px;
     left: 0;
 }
@@ -113,7 +113,7 @@ h2:after {
 h3 {
     font-size: 1.6rem;
     margin-bottom: 1.2rem;
-    color: var(--color-highlight-secondary);
+    color: var(--color-highlight);
     letter-spacing: 1.5px;
 }
 
@@ -140,7 +140,7 @@ a {
 
 a:hover {
     color: var(--color-accent);
-    text-shadow: 0 0 8px rgba(150, 97, 183, 0.6);
+    text-shadow: 0 0 8px rgba(138, 104, 212, 0.6);
 }
 
 /* Container */
@@ -153,18 +153,18 @@ a:hover {
 
 /* Header & Navigation */
 header {
-    background-color: rgba(6, 7, 11, 0.95);
+    background: linear-gradient(to right, rgba(6, 7, 11, 0.95), rgba(26, 34, 51, 0.95), rgba(6, 7, 11, 0.95));
     padding: 1rem 0;
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.8), 0 0 5px var(--color-highlight);
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: all 0.3s ease;
-    border-bottom: 1px solid rgba(150, 97, 183, 0.2);
+    border-bottom: 1px solid rgba(138, 104, 212, 0.3);
 }
 
 header.scrolled {
@@ -200,8 +200,8 @@ header.scrolled {
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
-    border: 1px solid var(--color-highlight-secondary);
-    box-shadow: 0 0 10px rgba(150, 97, 183, 0.4);
+    border: 1px solid var(--color-highlight);
+    box-shadow: 0 0 10px rgba(138, 104, 212, 0.4);
 }
 
 nav {
@@ -273,7 +273,7 @@ nav a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(6, 7, 11, 0.75), rgba(13, 14, 23, 0.95));
+    background: linear-gradient(rgba(6, 7, 11, 0.8), rgba(13, 14, 23, 0.95));
     z-index: 1;
 }
 
@@ -288,7 +288,7 @@ nav a:hover {
     font-size: 4.5rem;
     margin-bottom: 1.5rem;
     color: var(--color-highlight);
-    text-shadow: 0 0 15px rgba(150, 97, 183, 0.8), 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 0 20px rgba(138, 104, 212, 0.8), 2px 2px 4px rgba(0, 0, 0, 0.6);
     letter-spacing: 3px;
     text-transform: uppercase;
 }
@@ -329,7 +329,7 @@ nav a:hover {
 }
 
 .cta-button.primary {
-    background-color: var(--color-highlight);
+    background: linear-gradient(135deg, var(--color-highlight), var(--color-accent));
     color: var(--color-text-dark);
     border: 1px solid var(--color-highlight);
 }
@@ -342,16 +342,15 @@ nav a:hover {
 
 .cta-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3), 0 0 15px rgba(150, 97, 183, 0.4);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 20px rgba(138, 104, 212, 0.5);
 }
 
 .cta-button.primary:hover {
-    background-color: var(--color-highlight-secondary);
-    border-color: var(--color-highlight-secondary);
+    background: linear-gradient(135deg, #9b7ae0, var(--color-highlight));
 }
 
 .cta-button.secondary:hover {
-    background-color: rgba(150, 97, 183, 0.15);
+    background-color: rgba(138, 104, 212, 0.15);
 }
 
 /* Sections Common */
@@ -419,9 +418,9 @@ section:nth-child(even) {
     justify-content: center;
     cursor: pointer;
     transition: all 0.5s ease;
-    background: rgba(74, 48, 82, 0.7);
-    border: 2px solid rgba(115, 93, 143, 0.5);
-    box-shadow: 0 0 20px rgba(115, 93, 143, 0.6);
+    background: rgba(106, 76, 175, 0.7);
+    border: 2px solid rgba(138, 104, 212, 0.5);
+    box-shadow: 0 0 20px rgba(138, 104, 212, 0.6);
     z-index: 2;
 }
 
@@ -433,8 +432,8 @@ section:nth-child(even) {
 
 .play-button:hover {
     transform: translate(-50%, -50%) scale(1.1);
-    background: rgba(115, 93, 143, 0.9);
-    box-shadow: 0 0 30px rgba(115, 93, 143, 0.8);
+    background: rgba(138, 104, 212, 0.9);
+    box-shadow: 0 0 30px rgba(138, 104, 212, 0.8);
 }
 
 .play-button:hover i {
@@ -542,6 +541,14 @@ section:nth-child(even) {
     letter-spacing: 0.5px;
 }
 
+/* Element Cards */
+.element-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+}
+
 /* Gameplay Section */
 .gameplay-content {
     display: grid;
@@ -565,7 +572,7 @@ section:nth-child(even) {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, rgba(138, 146, 178, 0.3), rgba(77, 107, 56, 0.3), rgba(30, 58, 95, 0.3), rgba(107, 66, 38, 0.3), rgba(158, 42, 43, 0.3));
+    background: linear-gradient(45deg, rgba(197, 209, 235, 0.3), rgba(115, 185, 92, 0.3), rgba(62, 136, 194, 0.3), rgba(181, 131, 90, 0.3), rgba(230, 76, 76, 0.3));
     opacity: 0.5;
     mix-blend-mode: overlay;
     z-index: 1;
@@ -764,7 +771,7 @@ section:nth-child(even) {
     margin: 2rem 0;
     padding: 1.5rem;
     border-left: 3px solid var(--color-highlight);
-    background-color: rgba(212, 175, 55, 0.05);
+    background-color: rgba(138, 104, 212, 0.05);
 }
 
 .team-quote blockquote {
@@ -798,7 +805,7 @@ section:nth-child(even) {
     margin: 0 auto 1.5rem;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid var(--color-highlight-secondary);
+    border: 3px solid var(--color-highlight);
 }
 
 .member-image img {
@@ -829,7 +836,7 @@ section:nth-child(even) {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(212, 175, 55, 0.1);
+    background-color: rgba(138, 104, 212, 0.1);
     border-radius: 50%;
     transition: all 0.3s ease;
 }
@@ -918,7 +925,7 @@ section:nth-child(even) {
 }
 
 .newsletter-form button:hover {
-    background-color: var(--color-highlight-secondary);
+    background-color: var(--color-accent);
 }
 
 .contact-form {
@@ -951,8 +958,8 @@ section:nth-child(even) {
 
 .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
     outline: none;
-    border-color: var(--color-highlight-secondary);
-    box-shadow: 0 0 5px rgba(158, 126, 56, 0.5);
+    border-color: var(--color-highlight);
+    box-shadow: 0 0 5px rgba(138, 104, 212, 0.5);
 }
 
 .submit-button {
@@ -969,7 +976,7 @@ section:nth-child(even) {
 }
 
 .submit-button:hover {
-    background-color: var(--color-highlight-secondary);
+    background-color: var(--color-accent);
 }
 
 /* Footer */
@@ -1042,6 +1049,343 @@ footer {
     color: rgba(255, 255, 255, 0.4);
 }
 
+/* Gallery Styles */
+.gallery-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.gallery-btn {
+    padding: 10px 20px;
+    background-color: rgba(26, 33, 51, 0.8);
+    border: 1px solid rgba(138, 104, 212, 0.3);
+    color: var(--color-text);
+    font-family: var(--font-heading);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.gallery-btn::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--color-highlight);
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s ease;
+}
+
+.gallery-btn:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.gallery-btn:hover {
+    background-color: rgba(106, 76, 175, 0.2);
+    border-color: var(--color-highlight);
+}
+
+.gallery-btn.active {
+    background-color: var(--color-highlight);
+    color: var(--color-text-dark);
+    box-shadow: 0 0 10px rgba(138, 104, 212, 0.5);
+}
+
+/* Cards Gallery Layout */
+.cards-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.gallery-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.5s ease;
+    position: relative;
+}
+
+.card-image {
+    position: relative;
+    width: 240px;
+    height: 336px; /* Standard card ratio 2.5:3.5 */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: all 0.4s ease;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-card:hover .card-image {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8), 0 0 15px var(--color-highlight);
+    transform: translateY(-8px);
+}
+
+.gallery-card:hover .card-image img {
+    transform: scale(1.05);
+}
+
+/* Card Glow Effects */
+.card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.gallery-card:hover .card-glow {
+    opacity: 1;
+}
+
+.metal-glow {
+    box-shadow: 0 0 25px 5px var(--color-metal-glow);
+    border: 1px solid var(--color-metal);
+}
+
+.wood-glow {
+    box-shadow: 0 0 25px 5px var(--color-wood-glow);
+    border: 1px solid var(--color-wood);
+}
+
+.water-glow {
+    box-shadow: 0 0 25px 5px var(--color-water-glow);
+    border: 1px solid var(--color-water);
+}
+
+.earth-glow {
+    box-shadow: 0 0 25px 5px var(--color-earth-glow);
+    border: 1px solid var(--color-earth);
+}
+
+.fire-glow {
+    box-shadow: 0 0 25px 5px var(--color-fire-glow);
+    border: 1px solid var(--color-fire);
+}
+
+/* Card Titles */
+.gallery-card h4 {
+    margin-top: 1rem;
+    font-family: var(--font-heading);
+    color: var(--color-text);
+    text-align: center;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+}
+
+.gallery-card:hover h4 {
+    color: var(--color-highlight);
+}
+
+/* Animation for Floating Cards */
+@keyframes float {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+    25% {
+        transform: translateY(-5px) translateX(2px);
+    }
+    50% {
+        transform: translateY(0) translateX(5px);
+    }
+    75% {
+        transform: translateY(5px) translateX(2px);
+    }
+    100% {
+        transform: translateY(0) translateX(0);
+    }
+}
+
+.gallery-card {
+    animation: float 8s ease-in-out infinite;
+}
+
+/* Staggered animation timing for different cards */
+.gallery-card:nth-child(2n) {
+    animation-delay: 1s;
+}
+
+.gallery-card:nth-child(3n) {
+    animation-delay: 2s;
+}
+
+.gallery-card:nth-child(5n) {
+    animation-delay: 3s;
+}
+
+/* Individual element card colors */
+.gallery-card[data-element="metal"]:hover h4 {
+    color: var(--color-metal);
+    text-shadow: 0 0 5px rgba(197, 209, 235, 0.5);
+}
+
+.gallery-card[data-element="wood"]:hover h4 {
+    color: var(--color-wood);
+    text-shadow: 0 0 5px rgba(115, 185, 92, 0.5);
+}
+
+.gallery-card[data-element="water"]:hover h4 {
+    color: var(--color-water);
+    text-shadow: 0 0 5px rgba(62, 136, 194, 0.5);
+}
+
+.gallery-card[data-element="earth"]:hover h4 {
+    color: var(--color-earth);
+    text-shadow: 0 0 5px rgba(181, 131, 90, 0.5);
+}
+
+.gallery-card[data-element="fire"]:hover h4 {
+    color: var(--color-fire);
+    text-shadow: 0 0 5px rgba(230, 76, 76, 0.5);
+}
+
+/* Filter animation */
+.gallery-card.hidden {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+}
+
+.gallery-card.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Hidden cards for pagination */
+.gallery-card.hidden-card {
+    display: none;
+}
+
+/* Pagination */
+.gallery-pagination {
+    text-align: center;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.show-more-btn {
+    background-color: var(--color-highlight);
+    color: var(--color-text-dark);
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-heading);
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.show-more-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    background-color: var(--color-accent);
+}
+
+.card-count {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Particles effect */
+.card-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    animation: particleFloat 5s ease-in-out infinite;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+    25% {
+        opacity: 0.8;
+    }
+    75% {
+        opacity: 0.4;
+    }
+    100% {
+        transform: translateY(-50px) translateX(20px);
+        opacity: 0;
+    }
+}
+
+.metal-particle {
+    background-color: var(--color-metal);
+    box-shadow: 0 0 5px var(--color-metal-glow);
+}
+
+.wood-particle {
+    background-color: var(--color-wood);
+    box-shadow: 0 0 5px var(--color-wood-glow);
+}
+
+.water-particle {
+    background-color: var(--color-water);
+    box-shadow: 0 0 5px var(--color-water-glow);
+}
+
+.earth-particle {
+    background-color: var(--color-earth);
+    box-shadow: 0 0 5px var(--color-earth-glow);
+}
+
+.fire-particle {
+    background-color: var(--color-fire);
+    box-shadow: 0 0 5px var(--color-fire-glow);
+}
+
+/* Card appearance animation */
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Thêm hiệu ứng khi scroll */
 .reveal {
     position: relative;
@@ -1055,13 +1399,221 @@ footer {
     transform: translateY(0);
 }
 
-/* Responsive cho iPad/Tablet trở lên */
-@media screen and (min-width: 768px) {
-    .game-showcase {
-        flex-direction: row;
+/* Media queries for responsive design */
+@media screen and (max-width: 1023px) {
+    /* Điều chỉnh header */
+    .logo h1 {
+        font-size: 1.5rem;
     }
     
-    .game-video {
-        order: 0;
+    /* Điều chỉnh hero */
+    .hero-content h1 {
+        font-size: 2.8rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.3rem;
+    }
+    
+    /* Điều chỉnh section */
+    section {
+        padding: 4rem 0;
+    }
+    
+    /* Điều chỉnh grid thẻ nguyên tố */
+    .element-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Điều chỉnh section intro */
+    .intro-content {
+        gap: 2rem;
+    }
+    
+    /* Điều chỉnh section gameplay */
+    .gameplay-content {
+        gap: 2rem;
+    }
+    
+    /* Điều chỉnh section journey */
+    .journey-stages {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    /* Điều chỉnh contact */
+    .contact-content {
+        gap: 2rem;
+    }
+    
+    /* Điều chỉnh footer */
+    .footer-content {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .footer-links {
+        justify-content: flex-start;
+    }
+}
+
+/* Mobile (767px và nhỏ hơn) */
+@media screen and (max-width: 767px) {
+    /* Điều chỉnh menu */
+    #menu-toggle {
+        display: block;
+    }
+    
+    nav ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: rgba(15, 24, 35, 0.95);
+        width: 100%;
+        flex-direction: column;
+        padding: 1rem 0;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    nav ul.active {
+        display: flex;
+    }
+    
+    nav li {
+        margin: 0.5rem 5%;
+    }
+    
+    /* Điều chỉnh hero */
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.1rem;
+    }
+    
+    /* Điều chỉnh section */
+    section {
+        padding: 3rem 0;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+    }
+    
+    /* Điều chỉnh grid thẻ nguyên tố */
+    .element-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Điều chỉnh section intro */
+    .intro-content, .gameplay-content {
+        flex-direction: column;
+    }
+    
+    .intro-image, .gameplay-image {
+        order: -1;
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Điều chỉnh journey-stages */
+    .journey-stages {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Điều chỉnh contact */
+    .contact-content {
+        flex-direction: column;
+    }
+    
+    .social-media {
+        margin-top: 2rem;
+    }
+    
+    /* Điều chỉnh footer */
+    .footer-links {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    /* Card detail modal adjustments */
+    .modal-body {
+        flex-direction: column;
+        align-items: center;
+        padding: 1.5rem;
+        gap: 1.5rem;
+    }
+    
+    .card-preview {
+        width: 200px;
+    }
+    
+    .card-stats {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .card-relations {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+}
+
+/* Điều chỉnh cho màn hình siêu nhỏ */
+@media screen and (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 1rem;
+    }
+    
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    h3 {
+        font-size: 1.3rem;
+    }
+    
+    .element-card {
+        height: 300px;
+    }
+    
+    .social-icons {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .social-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .gallery-controls {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .gallery-card {
+        width: 100%;
+    }
+    
+    .cards-gallery {
+        grid-template-columns: 1fr;
+    }
+    
+    .card-image {
+        width: 100%;
+        max-width: 240px;
     }
 }
