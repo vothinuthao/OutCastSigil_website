@@ -2,6 +2,9 @@
 
 // Đợi tải tài liệu hoàn tất trước khi chạy script
 document.addEventListener('DOMContentLoaded', function() {
+    // Thêm hiệu ứng nguyên tố trên hero section
+    initHeroElementsEffect();
+    
     // Xử lý menu trên thiết bị di động
     const menuToggle = document.getElementById('menu-toggle');
     const navMenu = document.getElementById('nav-menu');
@@ -56,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Hiệu ứng xuất hiện khi cuộn
-    const revealElements = document.querySelectorAll('.container');
+    const revealElements = document.querySelectorAll('.container, .element-card');
     const revealThreshold = 0.15; // Phần tử hiển thị khi hiện 15%
     
     function checkReveal() {
@@ -66,17 +69,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (elementTop < window.innerHeight - elementVisible) {
                 element.classList.add('revealed');
-            }
-        });
-        
-        // Kiểm tra và hiển thị thẻ nguyên tố
-        const elementCards = document.querySelectorAll('.element-card');
-        elementCards.forEach(card => {
-            const cardTop = card.getBoundingClientRect().top;
-            const cardVisible = window.innerHeight * 0.2;
-            
-            if (cardTop < window.innerHeight - cardVisible) {
-                card.classList.add('visible');
+                
+                // Nếu là element-card, thêm class visible
+                if (element.classList.contains('element-card')) {
+                    element.classList.add('visible');
+                }
             }
         });
     }
@@ -136,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Xử lý nút hero
     const ctaButtons = document.querySelectorAll('.hero-buttons .cta-button');
     if (ctaButtons.length >= 2) {
-        // Nút "Khám Phá Ngay"
+        // Nút "Bước Vào Thế Giới"
         ctaButtons[0].addEventListener('click', function() {
             const gameSection = document.getElementById('game');
             if (gameSection) {
@@ -151,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Nút "Về Team Chúng Tôi"
+        // Nút "Về Nhà Phát Triển"
         ctaButtons[1].addEventListener('click', function() {
             const teamSection = document.getElementById('team');
             if (teamSection) {
@@ -268,3 +265,48 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Thêm hiệu ứng nguyên tố trên hero section
+function initHeroElementsEffect() {
+    const heroElements = document.querySelectorAll('.hero-element');
+    
+    // Thêm hiệu ứng di chuyển theo chuột
+    document.addEventListener('mousemove', function(e) {
+        const mouseX = e.clientX / window.innerWidth;
+        const mouseY = e.clientY / window.innerHeight;
+        
+        heroElements.forEach(element => {
+            const elementClass = Array.from(element.classList).find(cls => 
+                cls === 'metal' || cls === 'wood' || cls === 'water' || 
+                cls === 'earth' || cls === 'fire'
+            );
+            
+            let moveIntensity;
+            
+            switch(elementClass) {
+                case 'metal':
+                    moveIntensity = 30;
+                    break;
+                case 'wood':
+                    moveIntensity = 20;
+                    break;
+                case 'water':
+                    moveIntensity = 40;
+                    break;
+                case 'earth':
+                    moveIntensity = 15;
+                    break;
+                case 'fire':
+                    moveIntensity = 25;
+                    break;
+                default:
+                    moveIntensity = 20;
+            }
+            
+            const moveX = (mouseX - 0.5) * moveIntensity;
+            const moveY = (mouseY - 0.5) * moveIntensity;
+            
+            element.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        });
+    });
+}
