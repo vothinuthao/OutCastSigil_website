@@ -14,7 +14,9 @@ async function initCardDetailModal() {
         // Fetch the cards data
         const response = await fetch('data/cards.json');
         if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            console.log("Could not fetch cards data for modal, setting up basic card click handlers");
+            setupBasicCardClickHandlers();
+            return;
         }
         
         const data = await response.json();
@@ -24,6 +26,8 @@ async function initCardDetailModal() {
         
     } catch (error) {
         console.error('Error initializing card detail modal:', error);
+        // Fallback to basic card click handlers
+        setupBasicCardClickHandlers();
     }
 }
 
@@ -180,6 +184,7 @@ function createModalStructure() {
             margin: 1rem 0;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
             border: 2px solid rgba(255, 255, 255, 0.1);
+            position: relative;
         }
         
         .card-preview-image img {
@@ -334,6 +339,28 @@ function createModalStructure() {
             position: relative;
             overflow: visible;
         }
+
+        /* Add card glow effect in modal */
+        .card-preview-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 8px;
+            opacity: 0.7;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            box-shadow: inset 0 0 30px rgba(var(--element-color-rgb), 0.8);
+            animation: elementPulse 3s infinite;
+        }
+
+        @keyframes elementPulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+            100% { opacity: 0.3; }
+        }
         
         /* Media queries for responsive design */
         @media screen and (max-width: 768px) {
@@ -372,6 +399,40 @@ function createModalStructure() {
     document.head.appendChild(modalStyles);
 }
 
+// Fallback to basic card click handlers if JSON can't be loaded
+function setupBasicCardClickHandlers() {
+    document.addEventListener('click', function(event) {
+        // Check if clicked element is a gallery card or inside one
+        const galleryCard = event.target.closest('.gallery-card');
+        if (galleryCard) {
+            // Get element type and name from the card
+            const elementType = galleryCard.getAttribute('data-element') || 'default';
+            const cardName = galleryCard.querySelector('h4')?.textContent || 'Unknown Card';
+            
+            // Get card image path
+            const cardImageEl = galleryCard.querySelector('img');
+            const imageSrc = cardImageEl ? cardImageEl.src : null;
+            
+            // Create a basic card data object
+            const basicCardData = {
+                name: cardName,
+                nameEn: `${cardName} (English)`,
+                element: elementType,
+                rarity: 'common',
+                attack: Math.floor(Math.random() * 50) + 50, // Random value as placeholder
+                defense: Math.floor(Math.random() * 50) + 50, // Random value as placeholder
+                effectName: 'Basic Effect',
+                effect: 'This card has a basic effect based on its element.',
+                activateOn: 'When played',
+                image: imageSrc
+            };
+            
+            // Show card detail modal with basic data
+            showCardDetail(basicCardData);
+        }
+    });
+}
+
 // Add click event handlers to gallery cards
 function setupCardClickHandlers(cardsData) {
     // Add click event to all gallery cards (current and future)
@@ -385,22 +446,42 @@ function setupCardClickHandlers(cardsData) {
                 const cardData = cardsData.find(card => card.id === cardId);
                 if (cardData) {
                     showCardDetail(cardData);
+                    return;
                 }
-            } else {
-                // If no data-id attribute, use data-element as fallback
-                const elementType = galleryCard.getAttribute('data-element');
-                const cardName = galleryCard.querySelector('h4')?.textContent;
+            }
+            
+            // If no data-id attribute, use data-element as fallback
+            const elementType = galleryCard.getAttribute('data-element');
+            const cardName = galleryCard.querySelector('h4')?.textContent;
+            
+            // Try to find the card by name and element
+            if (elementType && cardName) {
+                const cardData = cardsData.find(card => 
+                    card.name === cardName && 
+                    getElementClass(card.element) === elementType
+                );
                 
-                // Try to find the card by name and element
-                if (elementType && cardName) {
-                    const cardData = cardsData.find(card => 
-                        card.name === cardName && 
-                        getElementClass(card.element) === elementType
-                    );
+                if (cardData) {
+                    showCardDetail(cardData);
+                } else {
+                    // If still no match, create basic data from the card
+                    const cardImageEl = galleryCard.querySelector('img');
+                    const imageSrc = cardImageEl ? cardImageEl.src : null;
                     
-                    if (cardData) {
-                        showCardDetail(cardData);
-                    }
+                    const basicCardData = {
+                        name: cardName,
+                        nameEn: `${cardName} (English)`,
+                        element: elementType,
+                        rarity: 'common',
+                        attack: Math.floor(Math.random() * 50) + 50,
+                        defense: Math.floor(Math.random() * 50) + 50,
+                        effectName: 'Basic Effect',
+                        effect: 'This card has a basic effect based on its element.',
+                        activateOn: 'When played',
+                        image: imageSrc
+                    };
+                    
+                    showCardDetail(basicCardData);
                 }
             }
         }
@@ -434,13 +515,37 @@ function showCardDetail(card) {
         existingImage.remove();
     }
     
-    // Create a new image with the proper path
+    // Create a new image container
     const cardImage = document.createElement('div');
     cardImage.className = 'card-preview-image';
     
-    // Set image path according to the file structure
-    const imagePath = `art/${card.element}/${card.image}`;
-    cardImage.innerHTML = `<img src="${imagePath}" alt="${card.name}" onerror="this.src='/api/placeholder/240/336?text=${encodeURIComponent(card.name)}'">`;
+    // Set image path
+    let imagePath;
+    
+    // If card.image is a full URL, use it directly
+    if (card.image && (card.image.startsWith('http') || card.image.startsWith('/'))) {
+        imagePath = card.image;
+    } else {
+        // Otherwise, construct the path
+        imagePath = `images/arts/${card.element}/${card.image || 'default.png'}`;
+    }
+    
+    // Create image with proper error handling
+    cardImage.innerHTML = `
+        <img src="${imagePath}" alt="${card.name}">
+    `;
+    
+    // Set CSS variable for element color for the glow effect
+    const elementColors = {
+        metal: '197, 209, 235',
+        wood: '115, 185, 92',
+        water: '62, 136, 194',
+        earth: '181, 131, 90',
+        fire: '230, 76, 76'
+    };
+    
+    cardImage.style.setProperty('--element-color-rgb', 
+        elementColors[card.element] || '138, 104, 212');
     
     // Insert the image after the card name but before the element symbol
     const elementSymbol = document.getElementById('modal-element-symbol');
@@ -449,15 +554,15 @@ function showCardDetail(card) {
     // Update modal content with card data
     document.getElementById('modal-card-name').textContent = card.name;
     document.getElementById('modal-name').textContent = card.name;
-    document.getElementById('modal-name-en').textContent = card.nameEn;
+    document.getElementById('modal-name-en').textContent = card.nameEn || '';
     
     // Set element symbol icon
-    const elementSymbol = document.getElementById('modal-element-symbol');
-    elementSymbol.innerHTML = getElementIcon(card.element);
-    elementSymbol.className = `element-symbol ${card.element}`;
+    const elementSymbolEl = document.getElementById('modal-element-symbol');
+    elementSymbolEl.innerHTML = getElementIcon(card.element);
+    elementSymbolEl.className = `element-symbol ${card.element}`;
     
     // Style element symbol based on element
-    const elementColors = {
+    const elementCSSColors = {
         metal: 'var(--color-metal)',
         wood: 'var(--color-wood)',
         water: 'var(--color-water)',
@@ -465,23 +570,23 @@ function showCardDetail(card) {
         fire: 'var(--color-fire)'
     };
     
-    elementSymbol.style.color = elementColors[card.element] || 'white';
-    elementSymbol.style.borderColor = elementColors[card.element] || 'white';
-    elementSymbol.style.boxShadow = `0 0 15px ${elementColors[card.element] || 'white'}`;
+    elementSymbolEl.style.color = elementCSSColors[card.element] || 'white';
+    elementSymbolEl.style.borderColor = elementCSSColors[card.element] || 'white';
+    elementSymbolEl.style.boxShadow = `0 0 15px ${elementCSSColors[card.element] || 'white'}`;
     
     // Set rarity
     const rarityElem = document.getElementById('modal-rarity');
-    rarityElem.textContent = card.rarity.charAt(0).toUpperCase() + card.rarity.slice(1);
-    rarityElem.className = `card-rarity ${card.rarity}`;
+    rarityElem.textContent = card.rarity ? card.rarity.charAt(0).toUpperCase() + card.rarity.slice(1) : 'Common';
+    rarityElem.className = `card-rarity ${card.rarity || 'common'}`;
     
     // Set stats
-    document.getElementById('modal-attack').textContent = card.attack;
-    document.getElementById('modal-defense').textContent = card.defense;
+    document.getElementById('modal-attack').textContent = card.attack || '50';
+    document.getElementById('modal-defense').textContent = card.defense || '50';
     
     // Set effect details
-    document.getElementById('modal-effect-name').textContent = card.effectName;
-    document.getElementById('modal-effect').textContent = card.effect;
-    document.getElementById('modal-activate-on').textContent = card.activateOn;
+    document.getElementById('modal-effect-name').textContent = card.effectName || 'Basic Effect';
+    document.getElementById('modal-effect').textContent = card.effect || 'This card has a basic effect.';
+    document.getElementById('modal-activate-on').textContent = card.activateOn || 'When played';
     
     // Set relationships
     const relationships = getRelationships(card.element);
@@ -490,6 +595,97 @@ function showCardDetail(card) {
     
     // Display modal
     modal.style.display = 'block';
+    
+    // Add special particle effects for the card in the modal
+    addModalCardParticles(card.element);
+}
+
+// Add elemental particle effects to the modal card
+function addModalCardParticles(elementType) {
+    // Get the preview image container
+    const previewImage = document.querySelector('.card-preview-image');
+    if (!previewImage) return;
+    
+    // Remove any existing particles
+    const existingParticles = previewImage.querySelector('.modal-particles');
+    if (existingParticles) {
+        existingParticles.remove();
+    }
+    
+    // Create particle container
+    const particlesContainer = document.createElement('div');
+    particlesContainer.className = 'modal-particles';
+    particlesContainer.style.cssText = `
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 5;
+    `;
+    
+    // Create particles
+    for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        
+        // Random size
+        const size = Math.random() * 6 + 3; // 3-9px
+        
+        // Random position
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        
+        // Animation duration and delay
+        const duration = Math.random() * 3 + 3; // 3-6s
+        const delay = Math.random() * 2; // 0-2s
+        
+        // Element-specific color
+        const colors = {
+            metal: 'rgba(197, 209, 235, 0.7)',
+            wood: 'rgba(115, 185, 92, 0.7)',
+            water: 'rgba(62, 136, 194, 0.7)',
+            earth: 'rgba(181, 131, 90, 0.7)',
+            fire: 'rgba(230, 76, 76, 0.7)'
+        };
+        
+        const color = colors[elementType] || 'rgba(138, 104, 212, 0.7)';
+        
+        // Apply styles
+        particle.style.cssText = `
+            position: absolute;
+            width: ${size}px;
+            height: ${size}px;
+            background-color: ${color};
+            border-radius: 50%;
+            top: ${posY}%;
+            left: ${posX}%;
+            opacity: 0;
+            box-shadow: 0 0 ${size/2}px ${color};
+            animation: modalParticleFloat ${duration}s ease-in-out ${delay}s infinite;
+        `;
+        
+        particlesContainer.appendChild(particle);
+    }
+    
+    // Add animation keyframes
+    if (!document.getElementById('modal-particle-animation')) {
+        const styleSheet = document.createElement('style');
+        styleSheet.id = 'modal-particle-animation';
+        styleSheet.innerHTML = `
+            @keyframes modalParticleFloat {
+                0% { transform: translateY(0); opacity: 0; }
+                20% { opacity: 0.7; }
+                80% { opacity: 0.5; }
+                100% { transform: translateY(-30px) translateX(${Math.random() > 0.5 ? '+' : '-'}15px); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+    }
+    
+    // Add particles to the preview image
+    previewImage.appendChild(particlesContainer);
 }
 
 // Helper function to get element icon

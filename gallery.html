@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thẻ Bài Nguyên Tố - The Outcast's Sigil</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/cards.css">
+    <link rel="stylesheet" href="styles/gallery.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+    <link rel="stylesheet" href="styles/gallery-page.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="logo-img">
+                <img src="images/assets/logo.png" alt="The Outcast's Sigil Logo">
+            </div>
+            <div class="logo-text">
+                <h1>The Outcast's Sigil</h1>
+                <p>Dark Card Building</p>
+            </div>
+        </div>
+        <nav>
+            <button id="menu-toggle"><i class="fas fa-bars"></i></button>
+            <ul id="nav-menu">
+                <li><a href="index.html#game">Game</a></li>
+                <li><a href="index.html#elements">Ngũ Hành</a></li>
+                <li><a href="index.html#cards-gallery">Thẻ Bài</a></li>
+                <li><a href="index.html#gameplay">Lối Chơi</a></li>
+                <li><a href="index.html#team">Team</a></li>
+                <li><a href="index.html#contact">Liên Hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="gallery-hero">
+        <div class="container">
+            <h1>Bộ Sưu Tập Thẻ Bài Nguyên Tố</h1>
+            <p>Khám phá sức mạnh huyền bí của ngũ hành thông qua bộ sưu tập thẻ bài đầy đủ của The Outcast's Sigil</p>
+            
+            <div class="element-orbs">
+                <div class="element-orb metal" data-element="metal">
+                    <i class="fas fa-circle"></i>
+                </div>
+                <div class="element-orb wood" data-element="wood">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <div class="element-orb water" data-element="water">
+                    <i class="fas fa-water"></i>
+                </div>
+                <div class="element-orb earth" data-element="earth">
+                    <i class="fas fa-mountain"></i>
+                </div>
+                <div class="element-orb fire" data-element="fire">
+                    <i class="fas fa-fire"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="all-cards">
+        <div class="container gallery-container">
+            <!-- Metal Cards Section -->
+            <div class="element-section" id="metal-cards">
+                <h2 class="element-title metal">Kim (Metal)</h2>
+                <p class="element-description">Nguyên tố Kim đại diện cho ý chí kiên định và sức mạnh tâm hồn. Những thẻ bài Kim có khả năng xuyên thấu bức màn hiện thực, nhìn thấu được chân lý ẩn giấu.</p>
+                <div class="cards-grid metal-grid">
+                    <!-- Metal cards will be generated here by JavaScript -->
+                    <div class="gallery-card" data-element="metal">
+                        <div class="card-image">
+                            <img src="images/arts/metal/MasteryOfTheBlade.png" alt="Kim - Kiếm Thuật Tinh Thông">
+                            <div class="card-glow metal-glow"></div>
+                        </div>
+                        <h4>Kiếm Thuật Tinh Thông</h4>
+                    </div>
+                    <div class="gallery-card" data-element="metal">
+                        <div class="card-image">
+                            <img src="images/arts/metal/MindStabilizingNeedle.png" alt="Kim - Định Thần Châm">
+                            <div class="card-glow metal-glow"></div>
+                        </div>
+                        <h4>Định Thần Châm</h4>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Wood Cards Section -->
+            <div class="element-section" id="wood-cards">
+                <h2 class="element-title wood">Mộc (Wood)</h2>
+                <p class="element-description">Nguyên tố Mộc đại diện cho sự tái sinh và sức sống bất diệt. Những thẻ bài Mộc có khả năng kết nối với thế giới tự nhiên và khai thác sức mạnh nguyên bản của vạn vật.</p>
+                <div class="cards-grid wood-grid">
+                    <!-- Wood cards will be generated here by JavaScript -->
+                    <div class="gallery-card" data-element="wood">
+                        <div class="card-image">
+                            <img src="images/arts/wood/EssenceOfLife.png" alt="Mộc - Sinh Mệnh Chi Hương">
+                            <div class="card-glow wood-glow"></div>
+                        </div>
+                        <h4>Sinh Mệnh Chi Hương</h4>
+                    </div>
+                    <div class="gallery-card" data-element="wood">
+                        <div class="card-image">
+                            <img src="images/arts/wood/SpiritWoodSummoning.png" alt="Mộc - Linh Mộc Triệu Hồi">
+                            <div class="card-glow wood-glow"></div>
+                        </div>
+                        <h4>Linh Mộc Triệu Hồi</h4>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Water Cards Section -->
+            <div class="element-section" id="water-cards">
+                <h2 class="element-title water">Thủy (Water)</h2>
+                <p class="element-description">Nguyên tố Thủy đại diện cho sự thay đổi không ngừng và trí tuệ sâu thẳm. Những thẻ bài Thủy có khả năng biến hóa và thích nghi với mọi hoàn cảnh, thấu hiểu dòng chảy của vận mệnh.</p>
+                <div class="cards-grid water-grid">
+                    <!-- Water cards will be generated here by JavaScript -->
+                    <div class="gallery-card" data-element="water">
+                        <div class="card-image">
+                            <img src="images/arts/water/WaterDoppelganger.png" alt="Thủy - Thủy Ảnh Phân Thân">
+                            <div class="card-glow water-glow"></div>
+                        </div>
+                        <h4>Thủy Ảnh Phân Thân</h4>
+                    </div>
+                    <div class="gallery-card" data-element="water">
+                        <div class="card-image">
+                            <img src="images/arts/water/IceSealBarrier.png" alt="Thủy - Băng Phong Kết Giới">
+                            <div class="card-glow water-glow"></div>
+                        </div>
+                        <h4>Băng Phong Kết Giới</h4>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Earth Cards Section -->
+            <div class="element-section" id="earth-cards">
+                <h2 class="element-title earth">Thổ (Earth)</h2>
+                <p class="element-description">Nguyên tố Thổ đại diện cho sự kiên cố và bất biến. Những thẻ bài Thổ có khả năng kết nối với những sức mạnh cổ xưa ngủ quên trong lòng đất, đồng thời khơi dậy họ từ giấc ngủ ngàn thu.</p>
+                <div class="cards-grid earth-grid">
+                    <!-- Earth cards will be generated here by JavaScript -->
+                    <div class="gallery-card" data-element="earth">
+                        <div class="card-image">
+                            <img src="images/arts/earth/EarthShatteringQuake.png" alt="Thổ - Đại Địa Chấn Động">
+                            <div class="card-glow earth-glow"></div>
+                        </div>
+                        <h4>Đại Địa Chấn Động</h4>
+                    </div>
+                    <div class="gallery-card" data-element="earth">
+                        <div class="card-image">
+                            <img src="images/arts/earth/EarthSpiritProtection.png" alt="Thổ - Địa Linh Phù Hộ">
+                            <div class="card-glow earth-glow"></div>
+                        </div>
+                        <h4>Địa Linh Phù Hộ</h4>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Fire Cards Section -->
+            <div class="element-section" id="fire-cards">
+                <h2 class="element-title fire">Hỏa (Fire)</h2>
+                <p class="element-description">Nguyên tố Hỏa đại diện cho đam mê cháy bỏng và sức mạnh hủy diệt. Những thẻ bài Hỏa có khả năng khơi dậy những ngọn lửa tiềm ẩn, đốt cháy mọi rào cản và thanh tẩy linh hồn.</p>
+                <div class="cards-grid fire-grid">
+                    <!-- Fire cards will be generated here by JavaScript -->
+                    <div class="gallery-card" data-element="fire">
+                        <div class="card-image">
+                            <img src="images/arts/fire/PhoenixDance.png" alt="Hỏa - Phượng Hoàng Chi Vũ">
+                            <div class="card-glow fire-glow"></div>
+                        </div>
+                        <h4>Phượng Hoàng Chi Vũ</h4>
+                    </div>
+                    <div class="gallery-card" data-element="fire">
+                        <div class="card-image">
+                            <img src="images/arts/fire/SpiritFireOfHeaven.png" alt="Hỏa - Linh Hỏa Phần Thiên">
+                            <div class="card-glow fire-glow"></div>
+                        </div>
+                        <h4>Linh Hỏa Phần Thiên</h4>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="index.html" class="back-to-home">Quay Về Trang Chủ</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/assets/logo.png" alt="The Outcast's Sigil Logo">
+                    <div>
+                        <h3>The Outcast's Sigil</h3>
+                        <p>Dark Card Building</p>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>The Outcast's Sigil</h4>
+                        <ul>
+                            <li><a href="index.html#game">Giới Thiệu</a></li>
+                            <li><a href="index.html#elements">Nguyên Tố</a></li>
+                            <li><a href="index.html#cards-gallery">Thẻ Bài</a></li>
+                            <li><a href="index.html#gameplay">Lối Chơi</a></li>
+                            <li><a href="index.html#team">Team</a></li>
+                        </ul>
+                    </div>
+                    <div class="link-group">
+                        <h4>Hỗ Trợ</h4>
+                        <ul>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Điều Khoản</a></li>
+                            <li><a href="#">Chính Sách</a></li>
+                            <li><a href="index.html#contact">Liên Hệ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 The Outcast's Sigil. Bản quyền thuộc về chúng tôi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/gallery.js"></script>
+    <script src="scripts/card-detail.js"></script>
+    
+    <script>
+        // Initialize gallery page functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Element orbs filter functionality
+            const elementOrbs = document.querySelectorAll('.element-orb');
+            elementOrbs.forEach(orb => {
+                orb.addEventListener('click', function() {
+                    const element = this.getAttribute('data-element');
+                    
+                    // Scroll to the corresponding section
+                    const section = document.getElementById(`${element}-cards`);
+                    if (section) {
+                        section.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+            
+            // Add glow and particle effects to all cards
+            const allCards = document.querySelectorAll('.gallery-card');
+            allCards.forEach(card => {
+                // Create particle effects for each card based on its element type
+                createCardParticles(card, card.getAttribute('data-element'));
+            });
+            
+            // Helper function to create card particles
+            function createCardParticles(cardElement, elementType) {
+                // Create particle container
+                const particlesContainer = document.createElement('div');
+                particlesContainer.className = 'card-particles';
+                
+                // Add particles to container
+                for (let i = 0; i < 15; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = `particle ${elementType}-particle`;
+                    
+                    // Random positioning
+                    const size = Math.random() * 4 + 2; // 2-6px
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    
+                    // Random starting position
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    
+                    // Set animation delay
+                    particle.style.animationDelay = `${Math.random() * 5}s`;
+                    
+                    particlesContainer.appendChild(particle);
+                }
+                
+                // Add particles container to card
+                const cardImage = cardElement.querySelector('.card-image');
+                if (cardImage) {
+                    cardImage.appendChild(particlesContainer);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

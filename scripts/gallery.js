@@ -1,10 +1,10 @@
-// gallery.js - JavaScript for the cards gallery functionality with JSON loading
+// gallery.js - JavaScript for the cards gallery functionality
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize cards gallery by loading JSON data
     initCardsGalleryWithJSON();
     
-    // Add elemental particles effects (kept from original code)
+    // Add elemental particles effects
     addElementalParticles();
 });
 
@@ -17,7 +17,10 @@ async function initCardsGalleryWithJSON() {
         // Fetch the cards data from JSON file
         const response = await fetch('data/cards.json');
         if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            console.log("Could not fetch cards data, falling back to HTML elements");
+            // Fallback to legacy initialization if JSON fails to load
+            initLegacyGallery();
+            return;
         }
         
         const data = await response.json();
@@ -92,6 +95,20 @@ function addParticleStyles() {
     document.head.appendChild(particleStyles);
 }
 
+// Create elementals particle effects for the gallery
+function addElementalParticles() {
+    // This function will be called after the cards are rendered
+    // to add particle effects to the gallery cards
+    const cards = document.querySelectorAll('.gallery-card');
+    
+    cards.forEach(card => {
+        const elementType = card.getAttribute('data-element');
+        if (elementType) {
+            createCardParticles(card, elementType);
+        }
+    });
+}
+
 // Render gallery cards from JSON data
 function renderGalleryCards(cards) {
     const galleryContainer = document.querySelector('.cards-gallery');
@@ -109,16 +126,13 @@ function renderGalleryCards(cards) {
         cardElement.setAttribute('data-id', card.id);
         
         // Generate image path according to the file structure
-        // art/[element]/[image name].png
-        const imagePath = `art/${card.element}/${card.image}`;
+        // images/arts/[element]/[image name].png
+        const imagePath = `images/arts/${card.element}/${card.image}`;
         
-        // Fallback to placeholder if image doesn't exist
-        const imageSrc = imagePath || `/api/placeholder/240/336?text=${encodeURIComponent(card.name)}`;
-        
-        // Create card HTML structure
+        // Create card HTML structure 
         cardElement.innerHTML = `
             <div class="card-image">
-                <img src="${imageSrc}" alt="${card.element} - ${card.name}" onerror="this.src='/api/placeholder/240/336?text=${encodeURIComponent(card.name)}'">
+                <img src="${imagePath}" alt="${card.element} - ${card.name}">
                 <div class="card-glow ${getElementClass(card.element)}-glow"></div>
             </div>
             <h4>${card.name}</h4>
@@ -209,7 +223,7 @@ function setupGalleryFilters() {
     });
 }
 
-// Fix: Improved filter gallery cards function with proper sorting
+// Improved filter gallery cards function with proper sorting
 function filterGalleryCards(filter) {
     const cards = document.querySelectorAll('.gallery-card');
     const cardsArray = Array.from(cards);
@@ -265,6 +279,15 @@ function initLegacyGallery() {
     const galleryButtons = document.querySelectorAll('.gallery-btn');
     const galleryCards = document.querySelectorAll('.gallery-card');
     
+    // Ensure existing cards have proper error handling for images
+    galleryCards.forEach(card => {
+        const img = card.querySelector('img');
+        if (img) {
+            // Remove any previous error handlers
+            img.removeAttribute('onerror');
+        }
+    });
+    
     // Add click event for filtering
     galleryButtons.forEach(button => {
         button.addEventListener('click', function() {
@@ -277,8 +300,8 @@ function initLegacyGallery() {
             // Get filter value
             const filterValue = this.getAttribute('data-element');
             
-            // Filter cards
-            filterGalleryCards(filterValue, galleryCards);
+            // Filter cards using the new filter function
+            filterGalleryCards(filterValue);
         });
     });
     
@@ -286,6 +309,12 @@ function initLegacyGallery() {
     galleryCards.forEach(card => {
         card.classList.add('visible');
     });
+    
+    // Create particles for existing cards
+    addElementalParticles();
+    
+    // Setup basic pagination for legacy mode
+    setupGalleryPagination(galleryCards.length);
 }
 
 // Add CSS for pagination to our gallery
@@ -329,12 +358,32 @@ function addGalleryPaginationCSS() {
             font-size: 0.9rem;
             font-style: italic;
         }
+        
+        .view-all-btn {
+            margin-top: 1rem;
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: var(--color-accent);
+            color: var(--color-text);
+            text-decoration: none;
+            border-radius: 4px;
+            font-family: var(--font-heading);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .view-all-btn:hover {
+            background-color: var(--color-highlight);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
     `;
     
     document.head.appendChild(paginationStyles);
 }
 
-// Setup gallery pagination
+// Setup gallery pagination with "View All" option
 function setupGalleryPagination(totalCards) {
     // Add CSS for pagination
     addGalleryPaginationCSS();
@@ -344,7 +393,7 @@ function setupGalleryPagination(totalCards) {
     
     // Set initial cards to show
     const initialCardsToShow = 6;
-    let currentlyShown = initialCardsToShow;
+    let currentlyShown = Math.min(initialCardsToShow, cards.length);
     
     // Create pagination container if it doesn't exist
     let paginationContainer = document.querySelector('.gallery-pagination');
@@ -366,14 +415,21 @@ function setupGalleryPagination(totalCards) {
     
     // Create show more button if there are more cards to show
     if (totalCards > initialCardsToShow) {
-        const showMoreBtn = document.createElement('button');
-        showMoreBtn.className = 'show-more-btn';
-        showMoreBtn.textContent = 'Hiển thị thêm';
+        // const showMoreBtn = document.createElement('button');
+        // showMoreBtn.className = 'show-more-btn';
+        // showMoreBtn.textContent = 'Hiển thị thêm';
         
         // Add card count info
         const cardCount = document.createElement('span');
         cardCount.className = 'card-count';
         cardCount.textContent = `Đang hiển thị ${currentlyShown} / ${totalCards} thẻ bài`;
+        
+        // Create "View All Cards" link
+        const viewAllLink = document.createElement('a');
+        viewAllLink.href = 'gallery.html'; // Link to the dedicated gallery page
+        viewAllLink.className = 'view-all-btn';
+        viewAllLink.textContent = 'Xem toàn bộ bộ sưu tập';
+        viewAllLink.target = '_blank'; // Open in new tab
         
         // Add button click event
         showMoreBtn.addEventListener('click', function() {
@@ -392,39 +448,41 @@ function setupGalleryPagination(totalCards) {
             cardCount.textContent = `Đang hiển thị ${currentlyShown} / ${totalCards} thẻ bài`;
             
             // Change button text if all cards are shown
-            if (currentlyShown >= totalCards) {
-                showMoreBtn.textContent = 'Hiển thị ít hơn';
-                showMoreBtn.classList.add('show-less');
-            } else if (showMoreBtn.classList.contains('show-less')) {
-                showMoreBtn.textContent = 'Hiển thị thêm';
-                showMoreBtn.classList.remove('show-less');
-            }
+            // if (currentlyShown >= totalCards) {
+            //     showMoreBtn.textContent = 'Hiển thị ít hơn';
+            //     showMoreBtn.classList.add('show-less');
+            // } else if (showMoreBtn.classList.contains('show-less')) {
+            //     showMoreBtn.textContent = 'Hiển thị thêm';
+            //     showMoreBtn.classList.remove('show-less');
+            // }
             
             // If button is in "show less" mode and clicked
-            if (showMoreBtn.classList.contains('show-less')) {
-                showMoreBtn.addEventListener('click', function resetGallery() {
-                    // Hide cards beyond initial display
-                    cards.forEach((card, index) => {
-                        if (index >= initialCardsToShow) {
-                            card.classList.add('hidden-card');
-                        }
-                    });
+            // if (showMoreBtn.classList.contains('show-less')) {
+            //     showMoreBtn.addEventListener('click', function resetGallery() {
+            //         // Hide cards beyond initial display
+            //         cards.forEach((card, index) => {
+            //             if (index >= initialCardsToShow) {
+            //                 card.classList.add('hidden-card');
+            //             }
+            //         });
                     
-                    // Reset counts and button
-                    currentlyShown = initialCardsToShow;
-                    cardCount.textContent = `Đang hiển thị ${currentlyShown} / ${totalCards} thẻ bài`;
-                    showMoreBtn.textContent = 'Hiển thị thêm';
-                    showMoreBtn.classList.remove('show-less');
+            //         // Reset counts and button
+            //         currentlyShown = initialCardsToShow;
+            //         cardCount.textContent = `Đang hiển thị ${currentlyShown} / ${totalCards} thẻ bài`;
+            //         showMoreBtn.textContent = 'Hiển thị thêm';
+            //         showMoreBtn.classList.remove('show-less');
                     
-                    // Remove this specific event listener to avoid duplicates
-                    showMoreBtn.removeEventListener('click', resetGallery);
-                });
-            }
+            //         // Remove this specific event listener to avoid duplicates
+            //         showMoreBtn.removeEventListener('click', resetGallery);
+            //     });
+            // }
         });
         
-        // Add button and count to pagination container
+        // Add elements to pagination container
         paginationContainer.appendChild(showMoreBtn);
         paginationContainer.appendChild(cardCount);
+        paginationContainer.appendChild(document.createElement('br'));
+        paginationContainer.appendChild(viewAllLink);
     }
     
     // Add CSS for card appearance animation
@@ -442,83 +500,4 @@ function setupGalleryPagination(totalCards) {
         }
     `;
     document.head.appendChild(cardAppearStyle);
-}
-
-// Function for enhanced card hover effect (bonus)
-function enhanceCardHoverEffects() {
-    const cards = document.querySelectorAll('.gallery-card');
-    
-    cards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            // Get element type
-            const elementType = this.getAttribute('data-element');
-            
-            // Create ambient glow effect around cursor
-            const glowEffect = document.createElement('div');
-            glowEffect.className = `ambient-glow ${elementType}-glow`;
-            
-            // Position the glow effect
-            const updateGlowPosition = (e) => {
-                const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                glowEffect.style.left = `${x}px`;
-                glowEffect.style.top = `${y}px`;
-            };
-            
-            // Track mouse movement
-            this.addEventListener('mousemove', updateGlowPosition);
-            
-            // Add the glow to the card
-            this.querySelector('.card-image').appendChild(glowEffect);
-            
-            // Clean up when mouse leaves
-            this.addEventListener('mouseleave', function() {
-                this.removeEventListener('mousemove', updateGlowPosition);
-                if (glowEffect.parentNode) {
-                    glowEffect.parentNode.removeChild(glowEffect);
-                }
-            });
-        });
-    });
-    
-    // Add CSS for ambient glow
-    const ambientGlowStyles = document.createElement('style');
-    ambientGlowStyles.innerHTML = `
-        .ambient-glow {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            opacity: 0.4;
-            filter: blur(15px);
-            transition: all 0.1s ease;
-        }
-        
-        .metal-glow.ambient-glow {
-            background-color: var(--color-metal);
-        }
-        
-        .wood-glow.ambient-glow {
-            background-color: var(--color-wood);
-        }
-        
-        .water-glow.ambient-glow {
-            background-color: var(--color-water);
-        }
-        
-        .earth-glow.ambient-glow {
-            background-color: var(--color-earth);
-        }
-        
-        .fire-glow.ambient-glow {
-            background-color: var(--color-fire);
-        }
-    `;
-    
-    document.head.appendChild(ambientGlowStyles);
 }
