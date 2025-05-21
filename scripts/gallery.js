@@ -124,7 +124,7 @@ function renderAllCards(cards) {
         cardElement.setAttribute('data-id', card.id);
         
         // Generate image path based on element and image name
-        const imagePath = `/api/placeholder/240/336`; // Fallback placeholder
+        const imagePath = ``; // Fallback placeholder
         
         // Create card HTML structure 
         cardElement.innerHTML = `
@@ -139,7 +139,7 @@ function renderAllCards(cards) {
         const img = cardElement.querySelector('img');
         img.onerror = function() {
             // If image fails to load, use placeholder
-            this.src = `/api/placeholder/240/336`;
+            this.src = ``;
             this.alt = card.name;
         };
         img.src = `./images/arts/${card.element}/${card.image}`;
@@ -252,7 +252,7 @@ function setupBasicGallery() {
         const img = card.querySelector('img');
         if (img) {
             img.onerror = function() {
-                this.src = '/api/placeholder/240/336';
+                this.src = '';
                 this.alt = 'Card placeholder';
             };
         }
