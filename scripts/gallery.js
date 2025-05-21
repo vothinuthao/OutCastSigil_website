@@ -142,7 +142,7 @@ function renderAllCards(cards) {
             this.src = `/api/placeholder/240/336`;
             this.alt = card.name;
         };
-        img.src = `images/arts/${card.element}/${card.image}`;
+        img.src = `./images/arts/${card.element}/${card.image}`;
         
         // Add card to gallery
         galleryContainer.appendChild(cardElement);
