@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Outcast's Sigil - Card Building Game</title>
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/cards.css">
+    <link rel="stylesheet" href="styles/card.css">
     <link rel="stylesheet" href="styles/gallery.css">
     <link rel="stylesheet" href="styles/responsive.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
@@ -199,8 +199,7 @@
             <p class="section-intro">Chiêm ngưỡng những lá bài huyền bí với năng lượng nguyên tố cổ xưa</p>
             
             <div class="gallery-controls">
-                <button class="gallery-btn active" data-element="all">Tất Cả</button>
-                <button class="gallery-btn" data-element="metal">Kim</button>
+                <button class="gallery-btn active" data-element="metal">Kim</button>
                 <button class="gallery-btn" data-element="wood">Mộc</button>
                 <button class="gallery-btn" data-element="water">Thủy</button>
                 <button class="gallery-btn" data-element="earth">Thổ</button>
@@ -208,17 +207,9 @@
             </div>
             
             <div class="cards-gallery">
-                <!-- Các thẻ bài sẽ được tạo động bằng JavaScript -->
-            </div>
-            
-            <!-- Đã loại bỏ nút "Hiển thị thêm" và phần hiển thị số lượng card -->
-            
-            <div class="text-center">
-                <a href="gallery.html" class="view-all-btn" target="_blank">Xem toàn bộ bộ sưu tập</a>
             </div>
         </div>
     </section>
-
     <section id="gameplay">
         <div class="container">
             <h2><span>Lối</span> Chơi</h2>
@@ -283,7 +274,7 @@
             <div class="team-members">
                 <div class="member">
                     <div class="member-image">
-                        <img src="/api/placeholder/200/200" alt="Hải Đào">
+                        <img src="images/huuhai.jpg" alt="Hải Đào">
                     </div>
                     <h3>Hải Đào</h3>
                     <p>Lead Developer</p>
@@ -294,7 +285,7 @@
                 </div>
                 <div class="member">
                     <div class="member-image">
-                        <img src="/api/placeholder/200/200" alt="Nữ Thảo">
+                        <img src="images/nuthao.png" alt="Nữ Thảo">
                     </div>
                     <h3>Nữ Thảo</h3>
                     <p>Game Developer</p>
@@ -383,7 +374,7 @@
     </footer>
 
     <script src="scripts/main.js"></script>
-    <script src="scripts/cards.js"></script>
+    <script src="scripts/card.js"></script>
     <script src="scripts/gallery.js"></script>
     <script src="scripts/card-detail.js"></script>
 </body>

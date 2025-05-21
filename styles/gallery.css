@@ -10,17 +10,18 @@
 }
 
 .gallery-btn {
-    padding: 10px 20px;
-    background-color: var(--color-bg-alt);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 24px;
+    background-color: rgba(15, 24, 35, 0.85);
+    border: 1px solid rgba(138, 104, 212, 0.2);
     color: var(--color-text);
     font-family: var(--font-heading);
     cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
+    transition: all 0.4s ease;
+    font-size: 0.95rem;
     letter-spacing: 1px;
     position: relative;
     overflow: hidden;
+    border-radius: 3px;
 }
 
 .gallery-btn::before {
@@ -30,20 +31,26 @@
     height: 2px;
     bottom: 0;
     left: 0;
-    background-color: var(--color-highlight);
+    background: linear-gradient(90deg, var(--color-highlight), transparent);
     transform: scaleX(0);
-    transform-origin: bottom right;
-    transition: transform 0.3s ease;
+    transform-origin: bottom left;
+    transition: transform 0.4s ease;
 }
 
 .gallery-btn:hover::before {
     transform: scaleX(1);
-    transform-origin: bottom left;
+}
+
+.gallery-btn:hover {
+    background-color: rgba(106, 76, 175, 0.2);
+    box-shadow: 0 0 15px rgba(106, 76, 175, 0.3);
 }
 
 .gallery-btn.active {
     background-color: var(--color-highlight);
     color: var(--color-text-dark);
+    box-shadow: 0 0 15px rgba(138, 104, 212, 0.6);
+    transform: translateY(-2px);
 }
 
 /* Cards Gallery Layout */
@@ -58,25 +65,30 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: all 0.5s ease;
     position: relative;
 }
 
 .card-image {
     position: relative;
     width: 240px;
-    height: 336px; /* Standard card ratio 2.5:3.5 */
+    height: 336px; /* Tỉ lệ thẻ bài chuẩn 2.5:3.5 */
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: var(--card-shadow);
-    transition: all 0.5s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7), 0 0 10px rgba(106, 76, 175, 0.3);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    background-color: rgba(15, 24, 35, 0.6);
 }
 
 .card-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.7s ease;
+}
+
+.gallery-card:hover .card-image {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8), 0 0 20px var(--color-highlight);
+    transform: translateY(-8px);
 }
 
 .gallery-card:hover .card-image img {
@@ -92,36 +104,36 @@
     bottom: 0;
     border-radius: 12px;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.7s ease;
     pointer-events: none;
 }
 
 .gallery-card:hover .card-glow {
-    opacity: 1;
+    opacity: 0.5;
 }
 
 .metal-glow {
-    box-shadow: 0 0 25px 5px var(--color-metal-glow);
+    box-shadow: 0 0 25px 8px var(--color-metal-glow);
     border: 1px solid var(--color-metal);
 }
 
 .wood-glow {
-    box-shadow: 0 0 25px 5px var(--color-wood-glow);
+    box-shadow: 0 0 25px 8px var(--color-wood-glow);
     border: 1px solid var(--color-wood);
 }
 
 .water-glow {
-    box-shadow: 0 0 25px 5px var(--color-water-glow);
+    box-shadow: 0 0 25px 8px var(--color-water-glow);
     border: 1px solid var(--color-water);
 }
 
 .earth-glow {
-    box-shadow: 0 0 25px 5px var(--color-earth-glow);
+    box-shadow: 0 0 25px 8px var(--color-earth-glow);
     border: 1px solid var(--color-earth);
 }
 
 .fire-glow {
-    box-shadow: 0 0 25px 5px var(--color-fire-glow);
+    box-shadow: 0 0 25px 8px var(--color-fire-glow);
     border: 1px solid var(--color-fire);
 }
 
@@ -132,88 +144,136 @@
     color: var(--color-text);
     text-align: center;
     font-size: 1.1rem;
-    transition: all 0.3s ease;
+    transition: color 0.4s ease;
 }
 
 .gallery-card:hover h4 {
     color: var(--color-highlight);
 }
 
-/* Animation for Floating Cards */
-@keyframes float {
+/* Animation for Floating Cards - NHẸ NHÀNG HƠN */
+@keyframes gentleFloat {
     0% {
-        transform: translateY(0) translateX(0);
-    }
-    25% {
-        transform: translateY(-5px) translateX(2px);
+        transform: translateY(0);
     }
     50% {
-        transform: translateY(0) translateX(5px);
-    }
-    75% {
-        transform: translateY(5px) translateX(2px);
+        transform: translateY(-5px);
     }
     100% {
-        transform: translateY(0) translateX(0);
+        transform: translateY(0);
     }
 }
 
 .gallery-card {
-    animation: float 8s ease-in-out infinite;
+    animation: gentleFloat 8s ease-in-out infinite;
 }
 
 /* Staggered animation timing for different cards */
 .gallery-card:nth-child(2n) {
-    animation-delay: 1s;
-}
-
-.gallery-card:nth-child(3n) {
     animation-delay: 2s;
 }
 
+.gallery-card:nth-child(3n) {
+    animation-delay: 4s;
+}
+
 .gallery-card:nth-child(5n) {
-    animation-delay: 3s;
+    animation-delay: 6s;
 }
 
 /* Individual element card colors */
 .gallery-card[data-element="metal"]:hover h4 {
     color: var(--color-metal);
-    text-shadow: 0 0 5px rgba(138, 146, 178, 0.5);
+    text-shadow: 0 0 8px rgba(197, 209, 235, 0.7);
 }
 
 .gallery-card[data-element="wood"]:hover h4 {
     color: var(--color-wood);
-    text-shadow: 0 0 5px rgba(77, 107, 56, 0.5);
+    text-shadow: 0 0 8px rgba(115, 185, 92, 0.7);
 }
 
 .gallery-card[data-element="water"]:hover h4 {
     color: var(--color-water);
-    text-shadow: 0 0 5px rgba(30, 58, 95, 0.5);
+    text-shadow: 0 0 8px rgba(62, 136, 194, 0.7);
 }
 
 .gallery-card[data-element="earth"]:hover h4 {
     color: var(--color-earth);
-    text-shadow: 0 0 5px rgba(107, 66, 38, 0.5);
+    text-shadow: 0 0 8px rgba(181, 131, 90, 0.7);
 }
 
 .gallery-card[data-element="fire"]:hover h4 {
     color: var(--color-fire);
-    text-shadow: 0 0 5px rgba(158, 42, 43, 0.5);
+    text-shadow: 0 0 8px rgba(230, 76, 76, 0.7);
 }
 
-/* Filter animation */
-.gallery-card.hidden {
+/* Loading placeholder styles - NHẸ NHÀNG & CHẬM HƠN */
+.card-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(110deg, 
+        rgba(20, 28, 43, 0) 0%, 
+        rgba(20, 28, 43, 0) 40%, 
+        rgba(40, 50, 70, 0.3) 50%, 
+        rgba(20, 28, 43, 0) 60%, 
+        rgba(20, 28, 43, 0) 100%);
+    background-size: 200% 100%;
+    animation: gentleShimmer 3.5s infinite linear;
+}
+
+@keyframes gentleShimmer {
+    0% {
+        background-position: -100% 0;
+    }
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+.card-image img.loaded + .card-image::before {
+    animation: none;
     opacity: 0;
-    transform: scale(0.8);
-    pointer-events: none;
 }
 
-.gallery-card.visible {
-    opacity: 1;
-    transform: scale(1);
+/* Ẩn nhưng không có hiệu ứng fade */
+.gallery-card.hidden {
+    display: none;
 }
 
-/* Particles effect */
+/* Card rarity indicators */
+.gallery-card::after {
+    content: '';
+    position: absolute;
+    bottom: 40px;
+    right: 20px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(150, 150, 150, 0.7);
+    box-shadow: 0 0 8px rgba(150, 150, 150, 0.5);
+    z-index: 3;
+}
+
+.gallery-card[data-rarity="rare"]::after {
+    background-color: rgba(0, 112, 221, 0.7);
+    box-shadow: 0 0 8px rgba(0, 112, 221, 0.5);
+}
+
+.gallery-card[data-rarity="epic"]::after {
+    background-color: rgba(163, 53, 238, 0.7);
+    box-shadow: 0 0 8px rgba(163, 53, 238, 0.5);
+}
+
+.gallery-card[data-rarity="legendary"]::after {
+    background-color: rgba(255, 128, 0, 0.7);
+    box-shadow: 0 0 8px rgba(255, 128, 0, 0.5);
+}
+
+/* Particles effect - NHẸ NHÀNG HƠN */
 .card-particles {
     position: absolute;
     width: 100%;
@@ -222,4 +282,71 @@
     left: 0;
     overflow: hidden;
     pointer-events: none;
+    z-index: 2;
+}
+
+.particle {
+    opacity: 0.5 !important;
+}
+
+/* Element-specific styles */
+.gallery-btn[data-element="metal"] {
+    border-color: var(--color-metal);
+}
+
+.gallery-btn[data-element="wood"] {
+    border-color: var(--color-wood);
+}
+
+.gallery-btn[data-element="water"] {
+    border-color: var(--color-water);
+}
+
+.gallery-btn[data-element="earth"] {
+    border-color: var(--color-earth);
+}
+
+.gallery-btn[data-element="fire"] {
+    border-color: var(--color-fire);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .cards-gallery {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .card-image {
+        width: 180px;
+        height: 252px;
+    }
+    
+    .gallery-btn {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .cards-gallery {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .card-image {
+        width: 140px;
+        height: 196px;
+    }
+    
+    .gallery-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .gallery-btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
 }
